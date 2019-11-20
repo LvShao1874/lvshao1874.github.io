@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.2">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.2" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.2">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.4.2',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="开头废话时隔3年,依然记得大二那年学的计算机网络.教材书用的是计算机网络(第五版). 当时对计算机网络有了一些认识.学习网络的过程个人理解为送快递的过程有相似之处..计算机网络协议层级数据链路 数据链路是什么: 数据链路,指OSI参考模型中的数据链路层,有时也指具体的以太网,无线局域网等通信手段. 数据链路层的协议定义了通过通信媒介互连的设备之间传输的规范.实际上,各个设备之间的数据传输时,数据链">
+<meta name="keywords" content="LvShao">
+<meta property="og:type" content="article">
+<meta property="og:title" content="重温计算机网络">
+<meta property="og:url" content="http://yoursite.com/2019/11/05/重温计算机网络/index.html">
+<meta property="og:site_name" content="LvShao Blog">
+<meta property="og:description" content="开头废话时隔3年,依然记得大二那年学的计算机网络.教材书用的是计算机网络(第五版). 当时对计算机网络有了一些认识.学习网络的过程个人理解为送快递的过程有相似之处..计算机网络协议层级数据链路 数据链路是什么: 数据链路,指OSI参考模型中的数据链路层,有时也指具体的以太网,无线局域网等通信手段. 数据链路层的协议定义了通过通信媒介互连的设备之间传输的规范.实际上,各个设备之间的数据传输时,数据链">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/mac_1.png">
+<meta property="og:image" content="http://yoursite.com/images/ip_4_22.png">
+<meta property="og:image" content="http://yoursite.com/images/ip_5_6.png">
+<meta property="og:image" content="http://yoursite.com/images/ip_5_19.png">
+<meta property="og:image" content="http://yoursite.com/images/ip_5_20.png">
+<meta property="og:updated_time" content="2019-11-13T14:20:10.764Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="重温计算机网络">
+<meta name="twitter:description" content="开头废话时隔3年,依然记得大二那年学的计算机网络.教材书用的是计算机网络(第五版). 当时对计算机网络有了一些认识.学习网络的过程个人理解为送快递的过程有相似之处..计算机网络协议层级数据链路 数据链路是什么: 数据链路,指OSI参考模型中的数据链路层,有时也指具体的以太网,无线局域网等通信手段. 数据链路层的协议定义了通过通信媒介互连的设备之间传输的规范.实际上,各个设备之间的数据传输时,数据链">
+<meta name="twitter:image" content="http://yoursite.com/images/mac_1.png">
+
+<link rel="canonical" href="http://yoursite.com/2019/11/05/重温计算机网络/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>重温计算机网络 | LvShao Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LvShao Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/05/重温计算机网络/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="LvShao">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LvShao Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          重温计算机网络
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-11-05 19:56:50" itemprop="dateCreated datePublished" datetime="2019-11-05T19:56:50+08:00">2019-11-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-13 22:20:10" itemprop="dateModified" datetime="2019-11-13T22:20:10+08:00">2019-11-13</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="开头废话"><a href="#开头废话" class="headerlink" title="开头废话"></a>开头废话</h2><pre><code>时隔3年,依然记得大二那年学的计算机网络.教材书用的是计算机网络(第五版).
+当时对计算机网络有了一些认识.学习网络的过程个人理解为送快递的过程有相似之处..</code></pre><h2 id="计算机网络协议层级"><a href="#计算机网络协议层级" class="headerlink" title="计算机网络协议层级"></a>计算机网络协议层级</h2><h2 id="数据链路"><a href="#数据链路" class="headerlink" title="数据链路"></a>数据链路</h2><ol>
+<li><p>数据链路是什么:<br> 数据链路,指OSI参考模型中的数据链路层,有时也指具体的以太网,无线局域网等通信手段.<br> 数据链路层的协议定义了通过通信媒介互连的设备之间传输的规范.实际上,各个设备之间的数据传输时,数据链路层和物理层都是必不可少的.<br> 因为计算机是以二进制0、1来表示信息.然而在实际的通信媒介的信号却是电压的高低,光的闪灭,以及电波的强弱等信号.把这些信号与二进制的0、1进行转换便是物理层主要职责.<br> 数据链路层处理的数据则是在物理层的基础上将0、1序列集合为一个叫做<code>帧</code>的块,然后再进行传输.</p>
+</li>
+<li><p>MAC地址<br> MAC地址用于识别数据链路中互连的节点.MAC地址长48比特,结构如下所示.MAC地址基本是全球唯一的(不总是唯一的,只要在同一链路上便不会有问题).<br> <img src="/images/mac_1.png" alt></p>
+</li>
+</ol>
+<h2 id="IP协议"><a href="#IP协议" class="headerlink" title="IP协议"></a>IP协议</h2><ol>
+<li>ip协议是什么<br> IP(Internet Protocol),即网际协议.主要负责将数据包发送给最终目标计算机.IP协议能够让世界上任何两台计算机之间进行通信.<ol>
+<li>协议层级:<br> 位于网络层,与数据链路层的关系:数据链路提供2个直连设备之间的通信功能,<br> 而网络层的IP协议则负责让没有直连的网络中的计算机进行通信.</li>
+<li>IP属于面向无连接型:<br> 主要有2点原因:1.简化   2.提速.<br> 面向无连接可以保证基于IP协议的通信更新轻量,保持连接会花费更多的处理时间.降低通信速度.<br> 而且通过网络协议的规划,每一层级遵循单一职责(避免实现复杂).在应用层有相应的TCP协议来实现有连接通信.</li>
+</ol>
+</li>
+</ol>
+<ol start="2">
+<li><p>IP地址的分类<br> IP地址有由32位比特(0,1)(即4字节)来标识,用十进制来表示则为xxx.xxx.xxx.xxx,其中xxx的范围为0~255.<br> 第四个xxx中0和255有特殊用途,不作为ip地址.<br> IP地址分为4个级别,A,B,C,D类.根据IP地址中第一位到第四位的比特列对齐网络标识和主机标识进行区分.</p>
+<p> 由于A,B,C,D分类方式导致IP地址存在大量浪费(因为A类的IP地址,该网段下可以有16777214个主机号,然而获得该网段的使用者并无法使用如此多的IP),<br> 所以借助子网掩码,可以将任一IP所属网段的网络进一步细分为更多的子网络,<br> 达到IP地址的高效利用.后面又使用CIDR(无类型域间选路),对IP进行更加任意的划分),例如203.183.224.0/23,将203.183.224.1到203.183.225.254这2个网段(原本均为C类地址)合并为一个网络,<br> 新的网络容纳主机510台(2^9-2).比C类地址原本的254主机(2^8-2)相比,可以容纳更多的主机.</p>
+<p> 然而使用上面的技术并不能解决IPV4本身IP数量少的问题(43亿).所以使用私有网段来解决一个局域网下ip的问题.再结合NAT技术,可以让使用私有网段IP的主机继续正常与网络中的拥有公网IP的主机进行通信.<br> Ps:(因此2台手机使用qq是并不是2个手机上的qq直接进行通信,有兴趣可以自行了解)<br> 所以,IPv4枯竭的问题,最终解决方案是使用IPv6.</p>
+</li>
+</ol>
+<ol start="3">
+<li><p>路由控制<br> 有了全球唯一的ip地址以后,在网络上的每个节点(路由器)借助各自的路由控制表来管理基于ip协议的数据包传输控制.路由控制表的形式有2种:</p>
+<ol>
+<li><p>静态路由控制,由管理员手动设置</p>
+</li>
+<li><p>动态路由控制,当路由器与其他路由器互相交换信息时自动刷新.</p>
+<p><img src="/images/ip_4_22.png" alt></p>
+</li>
+</ol>
+</li>
+</ol>
+<ol start="4">
+<li><p>相关衍生概念</p>
+<ol>
+<li><p>DNS<br>IP地址类似xxx.xxx.xxx.xxx的字符串,因为非常难以记忆.所以借助DNS(Domain Name System)的支持,可以用便于记忆的域名(比如<a href="http://www.google.com),来访问google网站" target="_blank" rel="noopener">www.google.com),来访问google网站</a>.
+DNS会将域名解析为具体的IP,然后再进行通信.</p>
+</li>
+<li><p>ARP<br>在网络层,只要知道了IP地址,便可以向这个目标地址发送IP数据段,<br>而在底层的数据链路层中进行实际通信时,是需要了解路由过程中每个IP地址所对应的MAC地址的<br>ARP便是解决此问题的协议.ARP借助ARP请求与ARP相应2种类型的包来确定目前IP的MAC地址<br><img src="/images/ip_5_6.png" alt><br>过程:<br>主机A为了获得主机B的MAC地址,起初需要通过广播发送一个ARP请求.借助广播机制,最终目标主机B会将自己的IP地址以ARP响应的形式返回给主机A.<br>为了减少每次通信都需要先利用ARP协议获取目标MAC地址,主机会缓存将IP与MAC的映射关系缓存到ARP缓存表中一段时间.(减少网络大量广播的情况),也因为IP与MAC地址的关系不是永久有效的,所以也只能缓存一段时间.</p>
+</li>
+<li><p>PARP<br>RARP(Reverse Address Resolution Protocol),是ARP的反协议.通过MAC地址来获得IP地址.</p>
+</li>
+<li><p>DHCP(Dynamic Host Configuration Protocol)<br>以前的主机加入网络前需要管理员手动指定ip地址,每一次设定ip都需要保证ip的唯一性,当ip越来越多以后,会变得十分繁琐.所以DHCP就是为了解决手动分配ip地址的协议.<br>为了检查将要分配的IP地址以及已经分配的IP地址是否可用,DHCP服务器或者客户端必须具备以下功能:</p>
+<ol>
+<li>DHCP服务器:在分配IP地址前发送ICMP回送请求包,确认没有返回应答.</li>
+<li>DHCP客户端,针对从DHCP那里获取的IP地址发送ARP请求包,确认没有返回应答.<br>在这个规则下,可用保证安全地进行IP地址自动分配.</li>
+</ol>
+</li>
+<li><p>NAT<br> NAT(Network Address Translator) 是用于在本地网络中使用私有地址,在连接互联网时使用公网IP地址的技术.NAT技术实际是为了解决IPv4地址枯竭而开发的技术.不过,在IPv6种为了提高网络安全也在使用NAT.<br> 后来还有NAPT技术(可以转换TCP,UDP端口号),由此可以实现用一个IP地址与多个主机的通信.</p>
+<ol>
+<li><p>NAT工作机制:<br> <img src="/images/ip_5_19.png" alt><br> 在NAT(NAPT)路由器的内部,有一张自动生成的记录转换地址的表,当10.0.0.10向163.221.120.9发送第一个包时生成这个表,并按照表中的映射关系进行处理.上述流程如果有多台机器与外部通信时,仅仅对IP进行转换,可能导致端口冲突(不同主机可能都使用同一端口对外通信),所以NAPT可以解决下该问题.<br> <img src="/images/ip_5_20.png" alt><br> 上图,主机163.221.120.9的端口是80,LAN中有两个客户端10.0.0.10和10.0.0.11同时进行通信,并且这2个客户端的本地端口都是1025.此时如果仅仅转换IP地址为路由器当前的公网IP地址:202.244.174.37,会导致冲突.<br> 为此,只要将其中任一导致冲突的IP(10.0.0.11)的端口号转换为空闲的端口(例如1026),就可以解决问题.<br> NAT维护的转换表由路由器自动管理,在第一次建立TCP链接时生成,在收到关闭连接时,发出FIN包的确认应答后从表中移除.</p>
+</li>
+<li><p>NAT的缺陷:<br> 由于NAT(NAPT)都依赖自己的转换表,会导致以下缺陷:</p>
+<ol>
+<li>无法从NAT的外部向内部服务器建立连接.</li>
+<li>转换表的生成和转换操作都会产生一定的开销</li>
+<li>通信过程中一旦NAT遇到异常重启时,所有的TCP连接都将被重置.</li>
+</ol>
+</li>
+<li><p>NAT穿越:<br> 解决外部无法主动向NAT内部主机发起请求的方案有多种,具体可以参考该文章:<a href="http://www.52im.net/article-64-1.html" target="_blank" rel="noopener">http://www.52im.net/article-64-1.html</a></p>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/2019/10/21/nginx/" rel="next" title="Nginx">
+                  <i class="fa fa-chevron-left"></i> Nginx
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#开头废话"><span class="nav-number">1.</span> <span class="nav-text">开头废话</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算机网络协议层级"><span class="nav-number">2.</span> <span class="nav-text">计算机网络协议层级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据链路"><span class="nav-number">3.</span> <span class="nav-text">数据链路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IP协议"><span class="nav-number">4.</span> <span class="nav-text">IP协议</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="site-author-image" itemprop="image" alt="LvShao"
+    src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">LvShao</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+  
+         <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=523223&auto=1&height=66"></iframe>
+  
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LvShao</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.2
+  </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.2"></script><script src="/js/motion.js?v=7.4.2"></script>
+<script src="/js/schemes/muse.js?v=7.4.2"></script>
+<script src="/js/next-boot.js?v=7.4.2"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
