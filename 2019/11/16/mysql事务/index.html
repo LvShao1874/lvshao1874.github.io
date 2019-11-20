@@ -50,20 +50,20 @@
   };
 </script>
 
-  <meta name="description" content="mysql存储位置修改mysql存储位置修改大致有2种方案1.修改config配置,将默认路径修改到新的路径.2.通过软链接将新的路径挂载到默认路径(基本不影响Mysql原有配置)方案2更适合在后期迁移,因为基本不改动Mysql配置. 操作步骤12345678910111213141516171819## 停止mysql服务sudo serviece mysql stop## 创建新的路径下的文件">
+  <meta name="description" content="开头废话mysql事务的概念最早是在大学学习数据库相关课程的时候接触的,不过等到真正工作了以后.在几次遇到相关的问题后,才有了更深的体悟.所以又把相关知识点重新归纳总结 什么是事务数据库区别于文件系统的重要特性之一便是事务.如果是文件系统,在写入文件时,如果发生异常,系统崩溃.那么写入的信息很可能会缺失.数据库对此异常场景需要有更严格的把控,保证数据一致性,所以从底层机制里去实现这一功能.事务有4">
 <meta name="keywords" content="mysql">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ubuntu mysql存储迁移">
-<meta property="og:url" content="http://yoursite.com/2019/10/15/ubuntu-mysql存储迁移/index.html">
+<meta property="og:title" content="Mysql事务">
+<meta property="og:url" content="http://yoursite.com/2019/11/16/mysql事务/index.html">
 <meta property="og:site_name" content="LvShao Blog">
-<meta property="og:description" content="mysql存储位置修改mysql存储位置修改大致有2种方案1.修改config配置,将默认路径修改到新的路径.2.通过软链接将新的路径挂载到默认路径(基本不影响Mysql原有配置)方案2更适合在后期迁移,因为基本不改动Mysql配置. 操作步骤12345678910111213141516171819## 停止mysql服务sudo serviece mysql stop## 创建新的路径下的文件">
+<meta property="og:description" content="开头废话mysql事务的概念最早是在大学学习数据库相关课程的时候接触的,不过等到真正工作了以后.在几次遇到相关的问题后,才有了更深的体悟.所以又把相关知识点重新归纳总结 什么是事务数据库区别于文件系统的重要特性之一便是事务.如果是文件系统,在写入文件时,如果发生异常,系统崩溃.那么写入的信息很可能会缺失.数据库对此异常场景需要有更严格的把控,保证数据一致性,所以从底层机制里去实现这一功能.事务有4">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-20T08:23:11.431Z">
+<meta property="og:updated_time" content="2019-11-19T02:36:58.955Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ubuntu mysql存储迁移">
-<meta name="twitter:description" content="mysql存储位置修改mysql存储位置修改大致有2种方案1.修改config配置,将默认路径修改到新的路径.2.通过软链接将新的路径挂载到默认路径(基本不影响Mysql原有配置)方案2更适合在后期迁移,因为基本不改动Mysql配置. 操作步骤12345678910111213141516171819## 停止mysql服务sudo serviece mysql stop## 创建新的路径下的文件">
+<meta name="twitter:title" content="Mysql事务">
+<meta name="twitter:description" content="开头废话mysql事务的概念最早是在大学学习数据库相关课程的时候接触的,不过等到真正工作了以后.在几次遇到相关的问题后,才有了更深的体悟.所以又把相关知识点重新归纳总结 什么是事务数据库区别于文件系统的重要特性之一便是事务.如果是文件系统,在写入文件时,如果发生异常,系统崩溃.那么写入的信息很可能会缺失.数据库对此异常场景需要有更严格的把控,保证数据一致性,所以从底层机制里去实现这一功能.事务有4">
 
-<link rel="canonical" href="http://yoursite.com/2019/10/15/ubuntu-mysql存储迁移/">
+<link rel="canonical" href="http://yoursite.com/2019/11/16/mysql事务/">
 
 
 <script id="page-configurations">
@@ -77,7 +77,7 @@
   };
 </script>
 
-  <title>ubuntu mysql存储迁移 | LvShao Blog</title>
+  <title>Mysql事务 | LvShao Blog</title>
   
 
 
@@ -183,7 +183,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/15/ubuntu-mysql存储迁移/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/16/mysql事务/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -196,7 +196,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          ubuntu mysql存储迁移
+          Mysql事务
         </h1>
 
         <div class="post-meta">
@@ -206,14 +206,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-10-15 10:02:51" itemprop="dateCreated datePublished" datetime="2019-10-15T10:02:51+08:00">2019-10-15</time>
+              <time title="创建时间：2019-11-16 16:48:35" itemprop="dateCreated datePublished" datetime="2019-11-16T16:48:35+08:00">2019-11-16</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-20 16:23:11" itemprop="dateModified" datetime="2019-10-20T16:23:11+08:00">2019-10-20</time>
+                <time title="修改时间：2019-11-19 10:36:58" itemprop="dateModified" datetime="2019-11-19T10:36:58+08:00">2019-11-19</time>
               </span>
 
           
@@ -227,9 +227,74 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="mysql存储位置修改"><a href="#mysql存储位置修改" class="headerlink" title="mysql存储位置修改"></a>mysql存储位置修改</h2><p>mysql存储位置修改大致有2种方案<br>1.修改config配置,将默认路径修改到新的路径.<br>2.通过软链接将新的路径挂载到默认路径(基本不影响Mysql原有配置)<br>方案2更适合在后期迁移,因为基本不改动Mysql配置.</p>
-<h3 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">## 停止mysql服务</span><br><span class="line">sudo serviece mysql stop</span><br><span class="line"></span><br><span class="line">## 创建新的路径下的文件夹,将目前Mysql的文件全部mv到新的路径下</span><br><span class="line">sudo mv /var/lib/mysql  /disk2/</span><br><span class="line"></span><br><span class="line">## 在原路径下创建软链接</span><br><span class="line">sudo ln -s /disk2/mysql/ /var/lib/mysql</span><br><span class="line"></span><br><span class="line">## 修改mysql可写入路径配置vim /etc/apparmor.d/usr.sbin.mysqld,根据配置里边的格式,新增</span><br><span class="line">/disk2/mysql/ r,</span><br><span class="line">/disk2/mysql/** rwk,</span><br><span class="line"></span><br><span class="line">## 重启apparmor&amp;&amp;mysql</span><br><span class="line">sudo service apparmor restart &amp;&amp; sudo service mysql restart</span><br><span class="line"></span><br><span class="line">## 如果mysql启动失败,可以在mysql配置里增加error.log,便可查看具体报错问题.</span><br><span class="line">[mysqld]</span><br><span class="line">log-error=/var/log/mysql/error.log</span><br></pre></td></tr></table></figure>
-
+        <h2 id="开头废话"><a href="#开头废话" class="headerlink" title="开头废话"></a>开头废话</h2><p>mysql事务的概念最早是在大学学习数据库相关课程的时候接触的,不过等到真正工作了以后.<br>在几次遇到相关的问题后,才有了更深的体悟.所以又把相关知识点重新归纳总结</p>
+<h2 id="什么是事务"><a href="#什么是事务" class="headerlink" title="什么是事务"></a>什么是事务</h2><p>数据库区别于文件系统的重要特性之一便是事务.如果是文件系统,在写入文件时,如果发生异常,系统崩溃.那么写入的信息很可能会缺失.<br>数据库对此异常场景需要有更严格的把控,保证数据一致性,所以从底层机制里去实现这一功能.<br>事务有4个特性,分别是ACID:</p>
+<ol>
+<li>原子性(A)</li>
+<li>一致性(C)</li>
+<li>隔离性(I)</li>
+<li>持久性(D)</li>
+</ol>
+<p>原子性:事务是不可分割的工作单位,只有整个事务过程中的操作都执行成功,整个事务才算成功.若事务中任何一个SQL语句执行失败,则已经执行成功的SQL语句也必须撤销,数据库状态应该退回到执行事务前的状态.<br>举最简单的例子:<br>银行转账.转账一定要确保2个账户的数据发生正确对应的变化,才能转账成功.<br>这个过程不允许发生A扣款成功,B账号金额却没有相应增加的情况.<br>整个转账的过程要么所有步骤成功,要么中途任一步骤失败(回滚数据,回到转账前的状态).</p>
+<p>一致性:事务将数据库从状态A变化状态B的过程,也需要保证符合目前的约束条件.比如数据库的完整性约束:例如在一个表中有字段为唯一约束,即该字段不允许有重复值.如果一个事务对该字段的某行数据进行修改,但是在事务提交或者事务回滚后,该字段存在重复值,这便破坏了约束条件,也就是事务的一致性要求.此时事务会被撤销,返回到初始化的状态.</p>
+<p>隔离性:事务的隔离性要求每个读写事务的对象和其他事务的操作对象能互相分离.即不同事务在提交前对其他事务都不可见.</p>
+<p>持久性:事务一旦提交,其结果会永远生效.即使发生了宕机等故障.数据也能恢复(因为在事务完成前一定会先将改动操作写进日志,再执行具体操作,所以事务提交后即使发生异常也能通过相关日志进行恢复,除非存储介质遭到破坏)</p>
+<h2 id="事务的隔离级别"><a href="#事务的隔离级别" class="headerlink" title="事务的隔离级别:"></a>事务的隔离级别:</h2><p>SQL标准定义的四个隔离级别为:</p>
+<ol>
+<li>Read Uuncommitted(读未提交)</li>
+<li>Read Committed(读提交)</li>
+<li>Repeatable Read(可重复读)</li>
+<li>Serializable(串行化)</li>
+</ol>
+<p>四个隔离级别的存在问题:</p>
+<table>
+<thead>
+<tr>
+<th>隔离级别</th>
+<th>脏读</th>
+<th>不可重复读</th>
+<th>幻读</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>读未提交</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>读提交</td>
+<td>N</td>
+<td>Y</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>可重复读</td>
+<td>N</td>
+<td>Y</td>
+<td>Y</td>
+<td>innodb默认隔离级别</td>
+</tr>
+<tr>
+<td>串行化</td>
+<td>N</td>
+<td>N</td>
+<td>N</td>
+<td>最安全</td>
+</tr>
+</tbody></table>
+<p>脏读:在读未提交模式下,不同的会话之间的操作都能实时看到(即使还没有提交).所以容易存在A事务操作的数据被B事务使用了,但是最终A事务回滚.B事务使用了A事务中最终未提交的数据.此为脏读.  </p>
+<p>不可重复读:读提交模式,只会读取到已经提交的事务的数据,这样便解决了读未提交存在的脏读问题.但是本身还是有不可重复读的问题.存在事务A操作执行某一操作(例如统计数据行数),在此期间B事务也修改了此数据且提交.那么当A事务内再次操作时(再次读取数据行数),会发现数据发生了变化.在一次事务内,数据出现了事务A内操作以外的变化,此为不可重复读.  </p>
+<p>幻读:可重复读解决了上述的2个问题,<code>在事务A期间,事务A不会看到事务A开启之后其他会话执行的数据库操作后的最新状态</code>.由于上述原因,有时会发生幻读的情况.<br>举例:</p>
+<ol>
+<li><p>事务A在判断不存在主键id=1后,决定插入主键id=1的数据(假设在判断后,事务A插入操作执行前的期间,有事务B插入了该主键id=1的数据),那么当事务A继续<code>正常</code>执行插入操作时,数据库会提示主键id=1已经存在,操作无法执行.<br>这在事务A看来是不可理解的,因为即使再执行:select count(*) from xxxx where id = 1;事务A内却依然会得到id=1不存在的结论.</p>
+</li>
+<li><p>事务A将全部数据的某字段置为xxx,进行更新.在此期间有事务B插入一条数据.当事务A提交以后.会发现有一条数据的值不为xxx(因为这是B提交的).</p>
+</li>
+</ol>
 
     </div>
 
@@ -246,17 +311,14 @@
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
-                <a href="/2019/08/31/一切的开始/" rel="next" title="一切的开始">
-                  <i class="fa fa-chevron-left"></i> 一切的开始
+                <a href="/2019/11/15/mysql锁/" rel="next" title="Mysql锁">
+                  <i class="fa fa-chevron-left"></i> Mysql锁
                 </a>
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-                <a href="/2019/10/19/atop/" rel="prev" title="atop监控工具">
-                  atop监控工具 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
       </footer>
@@ -295,7 +357,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql存储位置修改"><span class="nav-number">1.</span> <span class="nav-text">mysql存储位置修改</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#操作步骤"><span class="nav-number">1.1.</span> <span class="nav-text">操作步骤</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#开头废话"><span class="nav-number">1.</span> <span class="nav-text">开头废话</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是事务"><span class="nav-number">2.</span> <span class="nav-text">什么是事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务的隔离级别"><span class="nav-number">3.</span> <span class="nav-text">事务的隔离级别:</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

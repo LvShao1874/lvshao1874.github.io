@@ -20,7 +20,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Gemini',
     version: '7.4.2',
     exturl: false,
     sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
@@ -50,24 +50,27 @@
   };
 </script>
 
-  <meta name="description" content="开头废话时隔3年,依然记得大二那年学的计算机网络.教材书用的是计算机网络(第五版). 当时对计算机网络有了一些认识.学习网络的过程个人理解为送快递的过程有相似之处..计算机网络协议层级数据链路 数据链路是什么: 数据链路,指OSI参考模型中的数据链路层,有时也指具体的以太网,无线局域网等通信手段. 数据链路层的协议定义了通过通信媒介互连的设备之间传输的规范.实际上,各个设备之间的数据传输时,数据链">
-<meta name="keywords" content="LvShao">
+  <meta name="description" content="开头废话时隔3年,依然记得大二那年学的计算机网络.教材书用的是计算机网络(第五版).当时对计算机网络有了一些认识.学习网络的过程个人理解为送快递的过程有相似之处.. 计算机网络协议层级 OSI层级   OSI参考模型是将网络的复杂协议进行模块化,每一层级处理各自的职责. 主机A发送到主机B的过程,由上层到下层依次传递,到达主机B以后则是依次的从下层往上层传递信息. 在每个分层上,都可以处理由上一层">
+<meta name="keywords" content="network">
 <meta property="og:type" content="article">
 <meta property="og:title" content="重温计算机网络">
 <meta property="og:url" content="http://yoursite.com/2019/11/05/重温计算机网络/index.html">
 <meta property="og:site_name" content="LvShao Blog">
-<meta property="og:description" content="开头废话时隔3年,依然记得大二那年学的计算机网络.教材书用的是计算机网络(第五版). 当时对计算机网络有了一些认识.学习网络的过程个人理解为送快递的过程有相似之处..计算机网络协议层级数据链路 数据链路是什么: 数据链路,指OSI参考模型中的数据链路层,有时也指具体的以太网,无线局域网等通信手段. 数据链路层的协议定义了通过通信媒介互连的设备之间传输的规范.实际上,各个设备之间的数据传输时,数据链">
+<meta property="og:description" content="开头废话时隔3年,依然记得大二那年学的计算机网络.教材书用的是计算机网络(第五版).当时对计算机网络有了一些认识.学习网络的过程个人理解为送快递的过程有相似之处.. 计算机网络协议层级 OSI层级   OSI参考模型是将网络的复杂协议进行模块化,每一层级处理各自的职责. 主机A发送到主机B的过程,由上层到下层依次传递,到达主机B以后则是依次的从下层往上层传递信息. 在每个分层上,都可以处理由上一层">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/images/mac_1.png">
-<meta property="og:image" content="http://yoursite.com/images/ip_4_22.png">
-<meta property="og:image" content="http://yoursite.com/images/ip_5_6.png">
-<meta property="og:image" content="http://yoursite.com/images/ip_5_19.png">
-<meta property="og:image" content="http://yoursite.com/images/ip_5_20.png">
-<meta property="og:updated_time" content="2019-11-13T14:20:10.764Z">
+<meta property="og:image" content="http://yoursite.com/images/network/osi.png">
+<meta property="og:image" content="http://yoursite.com/images/network/tcp2.png">
+<meta property="og:image" content="http://yoursite.com/images/network/tcp.png">
+<meta property="og:image" content="http://yoursite.com/images/network/mac_1.png">
+<meta property="og:image" content="http://yoursite.com/images/network/ip_4_22.png">
+<meta property="og:image" content="http://yoursite.com/images/network/ip_5_6.png">
+<meta property="og:image" content="http://yoursite.com/images/network/ip_5_19.png">
+<meta property="og:image" content="http://yoursite.com/images/network/ip_5_20.png">
+<meta property="og:updated_time" content="2019-11-17T08:08:23.663Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="重温计算机网络">
-<meta name="twitter:description" content="开头废话时隔3年,依然记得大二那年学的计算机网络.教材书用的是计算机网络(第五版). 当时对计算机网络有了一些认识.学习网络的过程个人理解为送快递的过程有相似之处..计算机网络协议层级数据链路 数据链路是什么: 数据链路,指OSI参考模型中的数据链路层,有时也指具体的以太网,无线局域网等通信手段. 数据链路层的协议定义了通过通信媒介互连的设备之间传输的规范.实际上,各个设备之间的数据传输时,数据链">
-<meta name="twitter:image" content="http://yoursite.com/images/mac_1.png">
+<meta name="twitter:description" content="开头废话时隔3年,依然记得大二那年学的计算机网络.教材书用的是计算机网络(第五版).当时对计算机网络有了一些认识.学习网络的过程个人理解为送快递的过程有相似之处.. 计算机网络协议层级 OSI层级   OSI参考模型是将网络的复杂协议进行模块化,每一层级处理各自的职责. 主机A发送到主机B的过程,由上层到下层依次传递,到达主机B以后则是依次的从下层往上层传递信息. 在每个分层上,都可以处理由上一层">
+<meta name="twitter:image" content="http://yoursite.com/images/network/osi.png">
 
 <link rel="canonical" href="http://yoursite.com/2019/11/05/重温计算机网络/">
 
@@ -153,6 +156,11 @@
     <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
 
   </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
 
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
@@ -214,7 +222,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-13 22:20:10" itemprop="dateModified" datetime="2019-11-13T22:20:10+08:00">2019-11-13</time>
+                <time title="修改时间：2019-11-17 16:08:23" itemprop="dateModified" datetime="2019-11-17T16:08:23+08:00">2019-11-17</time>
               </span>
 
           
@@ -228,11 +236,21 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="开头废话"><a href="#开头废话" class="headerlink" title="开头废话"></a>开头废话</h2><pre><code>时隔3年,依然记得大二那年学的计算机网络.教材书用的是计算机网络(第五版).
-当时对计算机网络有了一些认识.学习网络的过程个人理解为送快递的过程有相似之处..</code></pre><h2 id="计算机网络协议层级"><a href="#计算机网络协议层级" class="headerlink" title="计算机网络协议层级"></a>计算机网络协议层级</h2><h2 id="数据链路"><a href="#数据链路" class="headerlink" title="数据链路"></a>数据链路</h2><ol>
+        <h2 id="开头废话"><a href="#开头废话" class="headerlink" title="开头废话"></a>开头废话</h2><p>时隔3年,依然记得大二那年学的计算机网络.教材书用的是计算机网络(第五版).<br>当时对计算机网络有了一些认识.学习网络的过程个人理解为送快递的过程有相似之处..</p>
+<h2 id="计算机网络协议层级"><a href="#计算机网络协议层级" class="headerlink" title="计算机网络协议层级"></a>计算机网络协议层级</h2><ol>
+<li><p>OSI层级<br> <img src="/images/network/osi.png" alt></p>
+<p> OSI参考模型是将网络的复杂协议进行模块化,每一层级处理各自的职责.<br> 主机A发送到主机B的过程,由上层到下层依次传递,到达主机B以后则是依次的从下层往上层传递信息.<br> 在每个分层上,都可以处理由上一层传递来的数据,对数据加上当前分层的协议所必须的首部信息.接收端收到数据后则对进行相应的拆解,将首部信息和内容分离,再传递给上层.<br> 因为职责的解耦,可以说每一层级之间都是互相透明的.</p>
+</li>
+</ol>
+<ol start="2">
+<li><p>TCP/IP协议网络层级<br> 由于OSI只是一个标准理论模型,实际上TCP/IP协议也能对应到OSI参考模型中.只是简化分为了4层.<br> <img src="/images/network/tcp2.png" alt></p>
+<p> <img src="/images/network/tcp.png" alt><br> 由上图可以看到每一层之间都加了各自层级的首部数据.以便在相应的层级中进行传输,最后由原样的拆解出数据传递给上一层.最后将原始数据传输到指定地址.</p>
+</li>
+</ol>
+<h2 id="数据链路"><a href="#数据链路" class="headerlink" title="数据链路"></a>数据链路</h2><ol>
 <li><p>数据链路是什么:<br> 数据链路,指OSI参考模型中的数据链路层,有时也指具体的以太网,无线局域网等通信手段.<br> 数据链路层的协议定义了通过通信媒介互连的设备之间传输的规范.实际上,各个设备之间的数据传输时,数据链路层和物理层都是必不可少的.<br> 因为计算机是以二进制0、1来表示信息.然而在实际的通信媒介的信号却是电压的高低,光的闪灭,以及电波的强弱等信号.把这些信号与二进制的0、1进行转换便是物理层主要职责.<br> 数据链路层处理的数据则是在物理层的基础上将0、1序列集合为一个叫做<code>帧</code>的块,然后再进行传输.</p>
 </li>
-<li><p>MAC地址<br> MAC地址用于识别数据链路中互连的节点.MAC地址长48比特,结构如下所示.MAC地址基本是全球唯一的(不总是唯一的,只要在同一链路上便不会有问题).<br> <img src="/images/mac_1.png" alt></p>
+<li><p>MAC地址<br> MAC地址用于识别数据链路中互连的节点.MAC地址长48比特,结构如下所示.MAC地址基本是全球唯一的(不总是唯一的,只要在同一链路上便不会有问题).<br> <img src="/images/network/mac_1.png" alt></p>
 </li>
 </ol>
 <h2 id="IP协议"><a href="#IP协议" class="headerlink" title="IP协议"></a>IP协议</h2><ol>
@@ -254,7 +272,7 @@
 <li><p>静态路由控制,由管理员手动设置</p>
 </li>
 <li><p>动态路由控制,当路由器与其他路由器互相交换信息时自动刷新.</p>
-<p><img src="/images/ip_4_22.png" alt></p>
+<p><img src="/images/network/ip_4_22.png" alt></p>
 </li>
 </ol>
 </li>
@@ -265,7 +283,7 @@
 <li><p>DNS<br>IP地址类似xxx.xxx.xxx.xxx的字符串,因为非常难以记忆.所以借助DNS(Domain Name System)的支持,可以用便于记忆的域名(比如<a href="http://www.google.com),来访问google网站" target="_blank" rel="noopener">www.google.com),来访问google网站</a>.
 DNS会将域名解析为具体的IP,然后再进行通信.</p>
 </li>
-<li><p>ARP<br>在网络层,只要知道了IP地址,便可以向这个目标地址发送IP数据段,<br>而在底层的数据链路层中进行实际通信时,是需要了解路由过程中每个IP地址所对应的MAC地址的<br>ARP便是解决此问题的协议.ARP借助ARP请求与ARP相应2种类型的包来确定目前IP的MAC地址<br><img src="/images/ip_5_6.png" alt><br>过程:<br>主机A为了获得主机B的MAC地址,起初需要通过广播发送一个ARP请求.借助广播机制,最终目标主机B会将自己的IP地址以ARP响应的形式返回给主机A.<br>为了减少每次通信都需要先利用ARP协议获取目标MAC地址,主机会缓存将IP与MAC的映射关系缓存到ARP缓存表中一段时间.(减少网络大量广播的情况),也因为IP与MAC地址的关系不是永久有效的,所以也只能缓存一段时间.</p>
+<li><p>ARP<br>在网络层,只要知道了IP地址,便可以向这个目标地址发送IP数据段,<br>而在底层的数据链路层中进行实际通信时,是需要了解路由过程中每个IP地址所对应的MAC地址的<br>ARP便是解决此问题的协议.ARP借助ARP请求与ARP相应2种类型的包来确定目前IP的MAC地址<br><img src="/images/network/ip_5_6.png" alt><br>过程:<br>主机A为了获得主机B的MAC地址,起初需要通过广播发送一个ARP请求.借助广播机制,最终目标主机B会将自己的IP地址以ARP响应的形式返回给主机A.<br>为了减少每次通信都需要先利用ARP协议获取目标MAC地址,主机会缓存将IP与MAC的映射关系缓存到ARP缓存表中一段时间.(减少网络大量广播的情况),也因为IP与MAC地址的关系不是永久有效的,所以也只能缓存一段时间.</p>
 </li>
 <li><p>PARP<br>RARP(Reverse Address Resolution Protocol),是ARP的反协议.通过MAC地址来获得IP地址.</p>
 </li>
@@ -277,7 +295,7 @@ DNS会将域名解析为具体的IP,然后再进行通信.</p>
 </li>
 <li><p>NAT<br> NAT(Network Address Translator) 是用于在本地网络中使用私有地址,在连接互联网时使用公网IP地址的技术.NAT技术实际是为了解决IPv4地址枯竭而开发的技术.不过,在IPv6种为了提高网络安全也在使用NAT.<br> 后来还有NAPT技术(可以转换TCP,UDP端口号),由此可以实现用一个IP地址与多个主机的通信.</p>
 <ol>
-<li><p>NAT工作机制:<br> <img src="/images/ip_5_19.png" alt><br> 在NAT(NAPT)路由器的内部,有一张自动生成的记录转换地址的表,当10.0.0.10向163.221.120.9发送第一个包时生成这个表,并按照表中的映射关系进行处理.上述流程如果有多台机器与外部通信时,仅仅对IP进行转换,可能导致端口冲突(不同主机可能都使用同一端口对外通信),所以NAPT可以解决下该问题.<br> <img src="/images/ip_5_20.png" alt><br> 上图,主机163.221.120.9的端口是80,LAN中有两个客户端10.0.0.10和10.0.0.11同时进行通信,并且这2个客户端的本地端口都是1025.此时如果仅仅转换IP地址为路由器当前的公网IP地址:202.244.174.37,会导致冲突.<br> 为此,只要将其中任一导致冲突的IP(10.0.0.11)的端口号转换为空闲的端口(例如1026),就可以解决问题.<br> NAT维护的转换表由路由器自动管理,在第一次建立TCP链接时生成,在收到关闭连接时,发出FIN包的确认应答后从表中移除.</p>
+<li><p>NAT工作机制:<br> <img src="/images/network/ip_5_19.png" alt><br> 在NAT(NAPT)路由器的内部,有一张自动生成的记录转换地址的表,当10.0.0.10向163.221.120.9发送第一个包时生成这个表,并按照表中的映射关系进行处理.上述流程如果有多台机器与外部通信时,仅仅对IP进行转换,可能导致端口冲突(不同主机可能都使用同一端口对外通信),所以NAPT可以解决下该问题.<br> <img src="/images/network/ip_5_20.png" alt><br> 上图,主机163.221.120.9的端口是80,LAN中有两个客户端10.0.0.10和10.0.0.11同时进行通信,并且这2个客户端的本地端口都是1025.此时如果仅仅转换IP地址为路由器当前的公网IP地址:202.244.174.37,会导致冲突.<br> 为此,只要将其中任一导致冲突的IP(10.0.0.11)的端口号转换为空闲的端口(例如1026),就可以解决问题.<br> NAT维护的转换表由路由器自动管理,在第一次建立TCP链接时生成,在收到关闭连接时,发出FIN包的确认应答后从表中移除.</p>
 </li>
 <li><p>NAT的缺陷:<br> 由于NAT(NAPT)都依赖自己的转换表,会导致以下缺陷:</p>
 <ol>
@@ -293,6 +311,15 @@ DNS会将域名解析为具体的IP,然后再进行通信.</p>
 </ol>
 </li>
 </ol>
+<h2 id="TCP-amp-UDP"><a href="#TCP-amp-UDP" class="headerlink" title="TCP&amp;UDP"></a>TCP&amp;UDP</h2><p>TCP/IP协议中有2个具有代表性的传输层协议,它们分别是TCP和UDP.</p>
+<ol>
+<li><p>端口号:<br> 在传输层,报文已经到达了主机.所以面临将最后的数据交付给对应的应用程序.因为主机上存在多个应用进行通信,所以需要对此进一步进行区分,将数据正确的交付到对应程序.<br> 端口号便是解决此问题的方案.根据报文里的源端口号和目标端口号,可以识别在传输层上一层的应用中所要进行处理的具体程序.<br> MAC地址用于识别数据链路中的节点,IP地址用于识别网络中的节点.而端口号则是在传输层中用来识别不同通信的应用程序.因此,它也被称为程序地址.</p>
+<p> 细节: 不同协议可以使用同一个端口.</p>
+</li>
+<li><p>TCP与UDP的区别:<br> TCP是面向连接的、可靠的流协议.TCP为提供可靠性传输,实现了”顺序控制”或”重发控制”机制.此外还有”流量控制”、”阻塞控制”、提高网络利用率等功能.<br> UDP是不具有可靠性的数据报协议.因此UDP不能保证消息一定到达.由上层应用去完成重发处理.</p>
+<p> 2者并没有优劣性,这是为了不同的应用场景而实现的协议.当需要可靠的信息传输时采用TCP协议,<br> 当要求高速传输和实时性时,例如网络电话.如果使用TCP,数据再传输途中如果丢失会导致重发,但这样无法通畅地传输通话人的声音,会导致无法进行正常交流.<br> 而使用UDP,即使数据丢失,它不会进行重发处理.只会影响小一部分的通话,不影响整体的通话.<br> 因此,TCP和UDP应该根据应用的目的按需使用.</p>
+</li>
+</ol>
 
     </div>
 
@@ -301,6 +328,9 @@ DNS会将域名解析为具体的IP,然后再进行通信.</p>
     
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/network/" rel="tag"># network</a>
+          </div>
 
         
 
@@ -314,6 +344,9 @@ DNS会将域名解析为具体的IP,然后再进行通信.</p>
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
+                <a href="/2019/11/15/mysql锁/" rel="prev" title="Mysql锁">
+                  Mysql锁 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
       </footer>
@@ -352,7 +385,7 @@ DNS会将域名解析为具体的IP,然后再进行通信.</p>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#开头废话"><span class="nav-number">1.</span> <span class="nav-text">开头废话</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算机网络协议层级"><span class="nav-number">2.</span> <span class="nav-text">计算机网络协议层级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据链路"><span class="nav-number">3.</span> <span class="nav-text">数据链路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IP协议"><span class="nav-number">4.</span> <span class="nav-text">IP协议</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#开头废话"><span class="nav-number">1.</span> <span class="nav-text">开头废话</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算机网络协议层级"><span class="nav-number">2.</span> <span class="nav-text">计算机网络协议层级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据链路"><span class="nav-number">3.</span> <span class="nav-text">数据链路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IP协议"><span class="nav-number">4.</span> <span class="nav-text">IP协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP-amp-UDP"><span class="nav-number">5.</span> <span class="nav-text">TCP&amp;UDP</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -368,30 +401,32 @@ DNS会将域名解析为具体的IP,然后再进行通信.</p>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">3</span>
-        <span class="site-state-item-name">标签</span>
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lvshao1874" title="GitHub &rarr; https://github.com/lvshao1874" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+  </div>
 
 
 
       </div>
-
-
 
     </div>
   </aside>
   <div id="sidebar-dimmer"></div>
 
-  
-         <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=523223&auto=1&height=66"></iframe>
-  
 
 
       </div>
@@ -413,7 +448,7 @@ DNS会将域名解析为具体的IP,然后再进行通信.</p>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.2
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.2
   </div>
 
         
@@ -439,7 +474,7 @@ DNS会将域名解析为具体的IP,然后再进行通信.</p>
   <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
   <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 <script src="/js/utils.js?v=7.4.2"></script><script src="/js/motion.js?v=7.4.2"></script>
-<script src="/js/schemes/muse.js?v=7.4.2"></script>
+<script src="/js/schemes/pisces.js?v=7.4.2"></script>
 <script src="/js/next-boot.js?v=7.4.2"></script>
 
 

@@ -20,7 +20,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Gemini',
     version: '7.4.2',
     exturl: false,
     sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
@@ -143,6 +143,11 @@
     <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
 
   </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
 
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
@@ -170,6 +175,202 @@
             
 
   <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/16/mysql事务/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="LvShao">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LvShao Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/16/mysql事务/" class="post-title-link" itemprop="url">Mysql事务</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-11-16 16:48:35" itemprop="dateCreated datePublished" datetime="2019-11-16T16:48:35+08:00">2019-11-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-19 10:36:58" itemprop="dateModified" datetime="2019-11-19T10:36:58+08:00">2019-11-19</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="开头废话"><a href="#开头废话" class="headerlink" title="开头废话"></a>开头废话</h2><p>mysql事务的概念最早是在大学学习数据库相关课程的时候接触的,不过等到真正工作了以后.<br>在几次遇到相关的问题后,才有了更深的体悟.所以又把相关知识点重新归纳总结</p>
+<h2 id="什么是事务"><a href="#什么是事务" class="headerlink" title="什么是事务"></a>什么是事务</h2><p>数据库区别于文件系统的重要特性之一便是事务.如果是文件系统,在写入文件时,如果发生异常,系统崩溃.那么写入的信息很可能会缺失.<br>数据库对此异常场景需要有更严格的把控,保证数据一致性,所以从底层机制里去实现这一功能.<br>事务有4个特性,分别是ACID:</p>
+<ol>
+<li>原子性(A)</li>
+<li>一致性(C)</li>
+<li>隔离性(I)</li>
+<li>持久性(D)</li>
+</ol>
+<p>原子性:事务是不可分割的工作单位,只有整个事务过程中的操作都执行成功,整个事务才算成功.若事务中任何一个SQL语句执行失败,则已经执行成功的SQL语句也必须撤销,数据库状态应该退回到执行事务前的状态.<br>举最简单的例子:<br>银行转账.转账一定要确保2个账户的数据发生正确对应的变化,才能转账成功.<br>这个过程不允许发生A扣款成功,B账号金额却没有相应增加的情况.<br>整个转账的过程要么所有步骤成功,要么中途任一步骤失败(回滚数据,回到转账前的状态).</p>
+<p>一致性:事务将数据库从状态A变化状态B的过程,也需要保证符合目前的约束条件.比如数据库的完整性约束:例如在一个表中有字段为唯一约束,即该字段不允许有重复值.如果一个事务对该字段的某行数据进行修改,但是在事务提交或者事务回滚后,该字段存在重复值,这便破坏了约束条件,也就是事务的一致性要求.此时事务会被撤销,返回到初始化的状态.</p>
+<p>隔离性:事务的隔离性要求每个读写事务的对象和其他事务的操作对象能互相分离.即不同事务在提交前对其他事务都不可见.</p>
+<p>持久性:事务一旦提交,其结果会永远生效.即使发生了宕机等故障.数据也能恢复(因为在事务完成前一定会先将改动操作写进日志,再执行具体操作,所以事务提交后即使发生异常也能通过相关日志进行恢复,除非存储介质遭到破坏)</p>
+<h2 id="事务的隔离级别"><a href="#事务的隔离级别" class="headerlink" title="事务的隔离级别:"></a>事务的隔离级别:</h2><p>SQL标准定义的四个隔离级别为:</p>
+<ol>
+<li>Read Uuncommitted(读未提交)</li>
+<li>Read Committed(读提交)</li>
+<li>Repeatable Read(可重复读)</li>
+<li>Serializable(串行化)</li>
+</ol>
+<p>四个隔离级别的存在问题:</p>
+<table>
+<thead>
+<tr>
+<th>隔离级别</th>
+<th>脏读</th>
+<th>不可重复读</th>
+<th>幻读</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>读未提交</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>读提交</td>
+<td>N</td>
+<td>Y</td>
+<td>Y</td>
+<td></td>
+</tr>
+<tr>
+<td>可重复读</td>
+<td>N</td>
+<td>Y</td>
+<td>Y</td>
+<td>innodb默认隔离级别</td>
+</tr>
+<tr>
+<td>串行化</td>
+<td>N</td>
+<td>N</td>
+<td>N</td>
+<td>最安全</td>
+</tr>
+</tbody></table>
+<p>脏读:在读未提交模式下,不同的会话之间的操作都能实时看到(即使还没有提交).所以容易存在A事务操作的数据被B事务使用了,但是最终A事务回滚.B事务使用了A事务中最终未提交的数据.此为脏读.  </p>
+<p>不可重复读:读提交模式,只会读取到已经提交的事务的数据,这样便解决了读未提交存在的脏读问题.但是本身还是有不可重复读的问题.存在事务A操作执行某一操作(例如统计数据行数),在此期间B事务也修改了此数据且提交.那么当A事务内再次操作时(再次读取数据行数),会发现数据发生了变化.在一次事务内,数据出现了事务A内操作以外的变化,此为不可重复读.  </p>
+<p>幻读:可重复读解决了上述的2个问题,<code>在事务A期间,事务A不会看到事务A开启之后其他会话执行的数据库操作后的最新状态</code>.由于上述原因,有时会发生幻读的情况.<br>举例:</p>
+<ol>
+<li><p>事务A在判断不存在主键id=1后,决定插入主键id=1的数据(假设在判断后,事务A插入操作执行前的期间,有事务B插入了该主键id=1的数据),那么当事务A继续<code>正常</code>执行插入操作时,数据库会提示主键id=1已经存在,操作无法执行.<br>这在事务A看来是不可理解的,因为即使再执行:select count(*) from xxxx where id = 1;事务A内却依然会得到id=1不存在的结论.</p>
+</li>
+<li><p>事务A将全部数据的某字段置为xxx,进行更新.在此期间有事务B插入一条数据.当事务A提交以后.会发现有一条数据的值不为xxx(因为这是B提交的).</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/15/mysql锁/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="LvShao">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LvShao Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/15/mysql锁/" class="post-title-link" itemprop="url">Mysql锁</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-11-15 16:39:21" itemprop="dateCreated datePublished" datetime="2019-11-15T16:39:21+08:00">2019-11-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-17 16:40:12" itemprop="dateModified" datetime="2019-11-17T16:40:12+08:00">2019-11-17</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
         
   
   
@@ -205,7 +406,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-13 22:20:10" itemprop="dateModified" datetime="2019-11-13T22:20:10+08:00">2019-11-13</time>
+                <time title="修改时间：2019-11-17 16:08:23" itemprop="dateModified" datetime="2019-11-17T16:08:23+08:00">2019-11-17</time>
               </span>
 
           
@@ -219,11 +420,21 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="开头废话"><a href="#开头废话" class="headerlink" title="开头废话"></a>开头废话</h2><pre><code>时隔3年,依然记得大二那年学的计算机网络.教材书用的是计算机网络(第五版).
-当时对计算机网络有了一些认识.学习网络的过程个人理解为送快递的过程有相似之处..</code></pre><h2 id="计算机网络协议层级"><a href="#计算机网络协议层级" class="headerlink" title="计算机网络协议层级"></a>计算机网络协议层级</h2><h2 id="数据链路"><a href="#数据链路" class="headerlink" title="数据链路"></a>数据链路</h2><ol>
+          <h2 id="开头废话"><a href="#开头废话" class="headerlink" title="开头废话"></a>开头废话</h2><p>时隔3年,依然记得大二那年学的计算机网络.教材书用的是计算机网络(第五版).<br>当时对计算机网络有了一些认识.学习网络的过程个人理解为送快递的过程有相似之处..</p>
+<h2 id="计算机网络协议层级"><a href="#计算机网络协议层级" class="headerlink" title="计算机网络协议层级"></a>计算机网络协议层级</h2><ol>
+<li><p>OSI层级<br> <img src="/images/network/osi.png" alt></p>
+<p> OSI参考模型是将网络的复杂协议进行模块化,每一层级处理各自的职责.<br> 主机A发送到主机B的过程,由上层到下层依次传递,到达主机B以后则是依次的从下层往上层传递信息.<br> 在每个分层上,都可以处理由上一层传递来的数据,对数据加上当前分层的协议所必须的首部信息.接收端收到数据后则对进行相应的拆解,将首部信息和内容分离,再传递给上层.<br> 因为职责的解耦,可以说每一层级之间都是互相透明的.</p>
+</li>
+</ol>
+<ol start="2">
+<li><p>TCP/IP协议网络层级<br> 由于OSI只是一个标准理论模型,实际上TCP/IP协议也能对应到OSI参考模型中.只是简化分为了4层.<br> <img src="/images/network/tcp2.png" alt></p>
+<p> <img src="/images/network/tcp.png" alt><br> 由上图可以看到每一层之间都加了各自层级的首部数据.以便在相应的层级中进行传输,最后由原样的拆解出数据传递给上一层.最后将原始数据传输到指定地址.</p>
+</li>
+</ol>
+<h2 id="数据链路"><a href="#数据链路" class="headerlink" title="数据链路"></a>数据链路</h2><ol>
 <li><p>数据链路是什么:<br> 数据链路,指OSI参考模型中的数据链路层,有时也指具体的以太网,无线局域网等通信手段.<br> 数据链路层的协议定义了通过通信媒介互连的设备之间传输的规范.实际上,各个设备之间的数据传输时,数据链路层和物理层都是必不可少的.<br> 因为计算机是以二进制0、1来表示信息.然而在实际的通信媒介的信号却是电压的高低,光的闪灭,以及电波的强弱等信号.把这些信号与二进制的0、1进行转换便是物理层主要职责.<br> 数据链路层处理的数据则是在物理层的基础上将0、1序列集合为一个叫做<code>帧</code>的块,然后再进行传输.</p>
 </li>
-<li><p>MAC地址<br> MAC地址用于识别数据链路中互连的节点.MAC地址长48比特,结构如下所示.MAC地址基本是全球唯一的(不总是唯一的,只要在同一链路上便不会有问题).<br> <img src="/images/mac_1.png" alt></p>
+<li><p>MAC地址<br> MAC地址用于识别数据链路中互连的节点.MAC地址长48比特,结构如下所示.MAC地址基本是全球唯一的(不总是唯一的,只要在同一链路上便不会有问题).<br> <img src="/images/network/mac_1.png" alt></p>
 </li>
 </ol>
 <h2 id="IP协议"><a href="#IP协议" class="headerlink" title="IP协议"></a>IP协议</h2><ol>
@@ -245,7 +456,7 @@
 <li><p>静态路由控制,由管理员手动设置</p>
 </li>
 <li><p>动态路由控制,当路由器与其他路由器互相交换信息时自动刷新.</p>
-<p><img src="/images/ip_4_22.png" alt></p>
+<p><img src="/images/network/ip_4_22.png" alt></p>
 </li>
 </ol>
 </li>
@@ -256,7 +467,7 @@
 <li><p>DNS<br>IP地址类似xxx.xxx.xxx.xxx的字符串,因为非常难以记忆.所以借助DNS(Domain Name System)的支持,可以用便于记忆的域名(比如<a href="http://www.google.com),来访问google网站" target="_blank" rel="noopener">www.google.com),来访问google网站</a>.
 DNS会将域名解析为具体的IP,然后再进行通信.</p>
 </li>
-<li><p>ARP<br>在网络层,只要知道了IP地址,便可以向这个目标地址发送IP数据段,<br>而在底层的数据链路层中进行实际通信时,是需要了解路由过程中每个IP地址所对应的MAC地址的<br>ARP便是解决此问题的协议.ARP借助ARP请求与ARP相应2种类型的包来确定目前IP的MAC地址<br><img src="/images/ip_5_6.png" alt><br>过程:<br>主机A为了获得主机B的MAC地址,起初需要通过广播发送一个ARP请求.借助广播机制,最终目标主机B会将自己的IP地址以ARP响应的形式返回给主机A.<br>为了减少每次通信都需要先利用ARP协议获取目标MAC地址,主机会缓存将IP与MAC的映射关系缓存到ARP缓存表中一段时间.(减少网络大量广播的情况),也因为IP与MAC地址的关系不是永久有效的,所以也只能缓存一段时间.</p>
+<li><p>ARP<br>在网络层,只要知道了IP地址,便可以向这个目标地址发送IP数据段,<br>而在底层的数据链路层中进行实际通信时,是需要了解路由过程中每个IP地址所对应的MAC地址的<br>ARP便是解决此问题的协议.ARP借助ARP请求与ARP相应2种类型的包来确定目前IP的MAC地址<br><img src="/images/network/ip_5_6.png" alt><br>过程:<br>主机A为了获得主机B的MAC地址,起初需要通过广播发送一个ARP请求.借助广播机制,最终目标主机B会将自己的IP地址以ARP响应的形式返回给主机A.<br>为了减少每次通信都需要先利用ARP协议获取目标MAC地址,主机会缓存将IP与MAC的映射关系缓存到ARP缓存表中一段时间.(减少网络大量广播的情况),也因为IP与MAC地址的关系不是永久有效的,所以也只能缓存一段时间.</p>
 </li>
 <li><p>PARP<br>RARP(Reverse Address Resolution Protocol),是ARP的反协议.通过MAC地址来获得IP地址.</p>
 </li>
@@ -268,7 +479,7 @@ DNS会将域名解析为具体的IP,然后再进行通信.</p>
 </li>
 <li><p>NAT<br> NAT(Network Address Translator) 是用于在本地网络中使用私有地址,在连接互联网时使用公网IP地址的技术.NAT技术实际是为了解决IPv4地址枯竭而开发的技术.不过,在IPv6种为了提高网络安全也在使用NAT.<br> 后来还有NAPT技术(可以转换TCP,UDP端口号),由此可以实现用一个IP地址与多个主机的通信.</p>
 <ol>
-<li><p>NAT工作机制:<br> <img src="/images/ip_5_19.png" alt><br> 在NAT(NAPT)路由器的内部,有一张自动生成的记录转换地址的表,当10.0.0.10向163.221.120.9发送第一个包时生成这个表,并按照表中的映射关系进行处理.上述流程如果有多台机器与外部通信时,仅仅对IP进行转换,可能导致端口冲突(不同主机可能都使用同一端口对外通信),所以NAPT可以解决下该问题.<br> <img src="/images/ip_5_20.png" alt><br> 上图,主机163.221.120.9的端口是80,LAN中有两个客户端10.0.0.10和10.0.0.11同时进行通信,并且这2个客户端的本地端口都是1025.此时如果仅仅转换IP地址为路由器当前的公网IP地址:202.244.174.37,会导致冲突.<br> 为此,只要将其中任一导致冲突的IP(10.0.0.11)的端口号转换为空闲的端口(例如1026),就可以解决问题.<br> NAT维护的转换表由路由器自动管理,在第一次建立TCP链接时生成,在收到关闭连接时,发出FIN包的确认应答后从表中移除.</p>
+<li><p>NAT工作机制:<br> <img src="/images/network/ip_5_19.png" alt><br> 在NAT(NAPT)路由器的内部,有一张自动生成的记录转换地址的表,当10.0.0.10向163.221.120.9发送第一个包时生成这个表,并按照表中的映射关系进行处理.上述流程如果有多台机器与外部通信时,仅仅对IP进行转换,可能导致端口冲突(不同主机可能都使用同一端口对外通信),所以NAPT可以解决下该问题.<br> <img src="/images/network/ip_5_20.png" alt><br> 上图,主机163.221.120.9的端口是80,LAN中有两个客户端10.0.0.10和10.0.0.11同时进行通信,并且这2个客户端的本地端口都是1025.此时如果仅仅转换IP地址为路由器当前的公网IP地址:202.244.174.37,会导致冲突.<br> 为此,只要将其中任一导致冲突的IP(10.0.0.11)的端口号转换为空闲的端口(例如1026),就可以解决问题.<br> NAT维护的转换表由路由器自动管理,在第一次建立TCP链接时生成,在收到关闭连接时,发出FIN包的确认应答后从表中移除.</p>
 </li>
 <li><p>NAT的缺陷:<br> 由于NAT(NAPT)都依赖自己的转换表,会导致以下缺陷:</p>
 <ol>
@@ -282,6 +493,15 @@ DNS会将域名解析为具体的IP,然后再进行通信.</p>
 </ol>
 </li>
 </ol>
+</li>
+</ol>
+<h2 id="TCP-amp-UDP"><a href="#TCP-amp-UDP" class="headerlink" title="TCP&amp;UDP"></a>TCP&amp;UDP</h2><p>TCP/IP协议中有2个具有代表性的传输层协议,它们分别是TCP和UDP.</p>
+<ol>
+<li><p>端口号:<br> 在传输层,报文已经到达了主机.所以面临将最后的数据交付给对应的应用程序.因为主机上存在多个应用进行通信,所以需要对此进一步进行区分,将数据正确的交付到对应程序.<br> 端口号便是解决此问题的方案.根据报文里的源端口号和目标端口号,可以识别在传输层上一层的应用中所要进行处理的具体程序.<br> MAC地址用于识别数据链路中的节点,IP地址用于识别网络中的节点.而端口号则是在传输层中用来识别不同通信的应用程序.因此,它也被称为程序地址.</p>
+<p> 细节: 不同协议可以使用同一个端口.</p>
+</li>
+<li><p>TCP与UDP的区别:<br> TCP是面向连接的、可靠的流协议.TCP为提供可靠性传输,实现了”顺序控制”或”重发控制”机制.此外还有”流量控制”、”阻塞控制”、提高网络利用率等功能.<br> UDP是不具有可靠性的数据报协议.因此UDP不能保证消息一定到达.由上层应用去完成重发处理.</p>
+<p> 2者并没有优劣性,这是为了不同的应用场景而实现的协议.当需要可靠的信息传输时采用TCP协议,<br> 当要求高速传输和实时性时,例如网络电话.如果使用TCP,数据再传输途中如果丢失会导致重发,但这样无法通畅地传输通话人的声音,会导致无法进行正常交流.<br> 而使用UDP,即使数据丢失,它不会进行重发处理.只会影响小一部分的通话,不影响整体的通话.<br> 因此,TCP和UDP应该根据应用的目的按需使用.</p>
 </li>
 </ol>
 
@@ -431,7 +651,7 @@ DNS会将域名解析为具体的IP,然后再进行通信.</p>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-07 14:19:12" itemprop="dateModified" datetime="2019-11-07T14:19:12+08:00">2019-11-07</time>
+                <time title="修改时间：2019-11-17 11:14:06" itemprop="dateModified" datetime="2019-11-17T11:14:06+08:00">2019-11-17</time>
               </span>
 
           
@@ -448,7 +668,7 @@ DNS会将域名解析为具体的IP,然后再进行通信.</p>
           <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>atop是一款用于监控Linux系统资源与进程的工具,它以一定的频率记录系统的运行状态,所采集的数据包含系统资源(CPU、内存、磁盘和网络)使用情况和进程运行情况,并能以日志文件的方式保存在磁盘中,服务器出现问题后,我们可获取相应的atop日志文件进行分析,更好的进行问题定位.</p>
 <h2 id="ubuntu-安装方式"><a href="#ubuntu-安装方式" class="headerlink" title="ubuntu 安装方式"></a>ubuntu 安装方式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install atop</span><br></pre></td></tr></table></figure>
 
-<h3 id="字段介绍"><a href="#字段介绍" class="headerlink" title="字段介绍"></a>字段介绍</h3><p><img src="/images/atop.png" alt></p>
+<h3 id="字段介绍"><a href="#字段介绍" class="headerlink" title="字段介绍"></a>字段介绍</h3><p><img src="/images/atop/atop.png" alt></p>
 <ul>
 <li>ATOP: 该列显示了主机名,当前展示log信息采样具体日期和时间点</li>
 <li>PRC: 该列显示进程整体运行情况,sys、usr字段分别指示进程在内核态和用户态的运行时间<ul>
@@ -515,7 +735,7 @@ DNS会将域名解析为具体的IP,然后再进行通信.</p>
 </li>
 </ol>
 <h2 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h2><p>配置路径:/etc/default/atop</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># /etc/default/atop</span><br><span class="line"></span><br><span class="line">INTERVAL=60      # 每60s记录一次</span><br><span class="line">LOGPATH=&quot;/var/log/atop&quot;    # log存储路径</span><br><span class="line">OUTFILE=&quot;$LOGPATH/daily.log&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># /etc/default/atop</span><br><span class="line">INTERVAL=60      # 每60s记录一次</span><br><span class="line">LOGPATH=&quot;/var/log/atop&quot;    # log存储路径</span><br><span class="line">OUTFILE=&quot;$LOGPATH/daily.log&quot;</span><br></pre></td></tr></table></figure>
 
 <p>修改配置后执行命令<code>sudo service atop restart</code></p>
 
@@ -635,7 +855,7 @@ DNS会将域名解析为具体的IP,然后再进行通信.</p>
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-13 22:19:12" itemprop="dateModified" datetime="2019-11-13T22:19:12+08:00">2019-11-13</time>
+                <time title="修改时间：2019-11-13 22:24:37" itemprop="dateModified" datetime="2019-11-13T22:24:37+08:00">2019-11-13</time>
               </span>
 
           
@@ -653,7 +873,7 @@ DNS会将域名解析为具体的IP,然后再进行通信.</p>
 
 <h3 id="一切的开始"><a href="#一切的开始" class="headerlink" title="一切的开始"></a>一切的开始</h3><p>  说来惭愧,自己想写博客的想法很早就有了.直到今天,才开始写下第一篇博客.<br>  作为一切的开始.博客大致会记录下自己的一些想法,一些技术上的分享和一些生活上的记录.<br>  快速回想一下过往,可能不爱拍照,不爱记录.虽说有很多很重要的事情,令人激动的事情.也许是时间久远了,由于情境的缺失,便很难再体会到那时候的心情.<br>  所以这便是记录的意义吧.</p>
 <h3 id="个人回顾"><a href="#个人回顾" class="headerlink" title="个人回顾"></a>个人回顾</h3><p>  大学里认真学习Java,由于工作的缘故,便转学了PHP和Python,至今毕业已经1年多了.<br>  加上实习,在技术的学习上也已经快2年了.遇到过各种类型的需求和问题,前端,后端,数据抓取,数据处理,服务器部署和运维,数据库优化.个人能力因此提高了不少,感谢需求 ：)</p>
-<h3 id="对未来的期许"><a href="#对未来的期许" class="headerlink" title="对未来的期许"></a>对未来的期许</h3><p>  希望在目前的基础上,继续深入学习,向资深(???)工程师的道路前进.</p>
+<h3 id="对未来的期许"><a href="#对未来的期许" class="headerlink" title="对未来的期许"></a>对未来的期许</h3><p>  希望在目前的基础上,继续深入学习,向资深(???)工程师的道路前进.<br>  生活要像这首歌一样~</p>
 
       
     </div>
@@ -716,30 +936,32 @@ DNS会将域名解析为具体的IP,然后再进行通信.</p>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">3</span>
-        <span class="site-state-item-name">标签</span>
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lvshao1874" title="GitHub &rarr; https://github.com/lvshao1874" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+  </div>
 
 
 
       </div>
-
-
 
     </div>
   </aside>
   <div id="sidebar-dimmer"></div>
 
-  
-         <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=523223&auto=1&height=66"></iframe>
-  
 
 
       </div>
@@ -761,7 +983,7 @@ DNS会将域名解析为具体的IP,然后再进行通信.</p>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.4.2
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.2
   </div>
 
         
@@ -787,7 +1009,7 @@ DNS会将域名解析为具体的IP,然后再进行通信.</p>
   <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
   <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 <script src="/js/utils.js?v=7.4.2"></script><script src="/js/motion.js?v=7.4.2"></script>
-<script src="/js/schemes/muse.js?v=7.4.2"></script>
+<script src="/js/schemes/pisces.js?v=7.4.2"></script>
 <script src="/js/next-boot.js?v=7.4.2"></script>
 
 
